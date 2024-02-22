@@ -1,5 +1,5 @@
 # Poemdle
-A chinese-poetry modificatio of wordle.
+A chinese-poetry modification of wordle.
 
 ## Usage
 `python wordle_flask.py`
