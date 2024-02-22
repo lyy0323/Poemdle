@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.101.0">
+    <title>Wordle</title>
+
+<!--    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/cover/">-->
+
+    
+
+    
+
+<link href="/static/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="/static/cover.css" rel="stylesheet">
+  </head>
+  <body class="d-flex h-100 text-center text-bg-dark">
+    
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <header class="mb-auto">
+    <div>
+      <h3 class="float-md-start mb-0">Poemdle - {{ w.key_word }}</h3>
+<!--      <nav class="nav nav-masthead justify-content-center float-md-end">-->
+<!--        <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="#">Home</a>-->
+<!--        <a class="nav-link fw-bold py-1 px-0" href="#">Features</a>-->
+<!--        <a class="nav-link fw-bold py-1 px-0" href="#">Contact</a>-->
+<!--      </nav>-->
+    </div>
+  </header>
+
+  <main class="px-3">
+    <h1>{{w.get_init()[0]}} __{{(w.length-3)*" __"}} {{w.get_init()[1]}}</h1>
+    {% if w.need_solve %}
+    <div align="left" style="border-radius: 20px; background: #CCC; padding: 10px">
+    <form name="my" style="height: 25px" action = "/" onsubmit="return validateForm()" method = "POST">
+      <input align="center" type="text" name="guess" autocomplete="off" value="" placeholder="" style="text-indent: 20px; float: left; width: 80%; height: 25px; border-radius: 10px; outline: none; font-size: 16px; background-color: transparent; border: 0px">
+      <div class="search-button" style="float: right; border: 0px; height: 25px">
+        <button type="submit" value="" style="height: 25px; border: 0px; background-color: transparent"><b>提交</b></button>
+      </div>
+    </form></div>
+    {% endif %}
+    <br><br><br>
+    <div align="center">
+    {%for i in range(0, lent)%}
+      {{w.historic[i] | safe}}
+    {%endfor%}
+    </div>
+    {% if not w.need_solve %}
+      {{w.explain}}
+    <br><br><br>
+    {% endif %}
+    <div class="lead">
+      {% if w.need_solve %}
+      <a href="/" class="btn btn-lg btn-secondary fw-bold border-gray bg-gray">重新开始</a>
+      {% else %}
+      <a href="/" class="btn btn-lg btn-secondary fw-bold border-white bg-white">再来一次</a>
+      {% endif %}
+    </div>
+    <br>
+    <h5>诗句中一定含有“{{ w.key_word }}”字。填写答案时，请将首尾二字一并填上。</h5>
+  </main>
+
+  <footer class="mt-auto text-white-50">
+    <p>上 海 交 通 大 学 国 学 社</p>
+    <p>e-mail: guoxue_sjtu@163.com</p>
+  </footer>
+</div>
+  <script>
+    function validateForm()
+{
+  var x=document.forms["my"]["guess"].value;
+  if (x==null || x=="" || x.length != {{w.length}})
+  {
+    alert("请输入长度为{{w.length}}的句子");
+    return false;
+  }
+}
+  </script>
+
+    
+  </body>
+</html>
