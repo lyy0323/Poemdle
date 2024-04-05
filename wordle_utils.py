@@ -3,7 +3,7 @@ from typing import Union
 
 
 # config
-key_word = '灯'
+key_word = '青'
 
 
 class Wordle:
