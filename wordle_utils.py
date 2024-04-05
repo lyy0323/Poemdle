@@ -13,7 +13,10 @@ class Wordle:
             self.current = None
             self.historic = []
             self.need_solve = True
-            pool = open(f'./pool_{key_word}.csv', encoding='GBK').read().splitlines()
+            try:
+                pool = open(f'./pool_{key_word}.csv', encoding='GBK').read().strip().splitlines()
+            except:
+                pool = open(f'./pool_{key_word}.csv', encoding='utf-8').read().strip().splitlines()
             pool_length = len(pool)
             if pool_id and 1 <= int(pool_id) <= pool_length:
                 goal = pool[int(pool_id) - 1]
