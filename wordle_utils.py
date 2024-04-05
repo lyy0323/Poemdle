@@ -46,7 +46,7 @@ class Wordle:
             self.current = current_guess
         return self
 
-    def match(self) -> list[int]:
+    def match(self) -> list:
         """
         检测和匹配作答与正确答案。
         """
